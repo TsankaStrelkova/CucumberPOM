@@ -25,6 +25,10 @@ public class DriverFactory {
     private static WebDriver createDriver()  {
         WebDriver driver = null;
 
+        // use it if you are going to read browser from configuration.properties
+        //String browserType = getBrowserType();
+
+        // use this if you read browser type as parameter (running mvn test -Dbrowser="chrome")
         String browserType = getBrowserType();
 
         switch (browserType) {
