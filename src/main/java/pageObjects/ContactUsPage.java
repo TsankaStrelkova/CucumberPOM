@@ -7,7 +7,7 @@ import utils.GlobalVars;
 public class ContactUsPage extends BasePage {
 
     // default access modifier private
-    By firstNameField = By.cssSelector("input[name='first_name'");
+    By firstNameField = By.cssSelector("input[name='first_name555'");
     By lastNameField = By.cssSelector("input[name='last_name']");
     By emailField = By.cssSelector("input[name='email']");
     By commentField = By.cssSelector("textarea[name='message']");
