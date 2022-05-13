@@ -1,4 +1,4 @@
-@SuccsessfulSubmition
+@ContactUs @SuccsessfulSubmition
 Feature: WebDriver University - Contact Us Page
 
   @SuccsessfulSubmitionUniqueData
