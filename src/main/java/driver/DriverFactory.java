@@ -29,7 +29,7 @@ public class DriverFactory {
         //String browserType = getBrowserType();
 
         // use this if you read browser type as parameter (running mvn test -Dbrowser="chrome")
-        String browserType = getBrowserType();
+        String browserType = System.getProperty("browser");
 
         switch (browserType) {
             case "chrome" :
