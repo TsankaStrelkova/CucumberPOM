@@ -25,11 +25,7 @@ public class DriverFactory {
     private static WebDriver createDriver()  {
         WebDriver driver = null;
 
-        // use it if you are going to read browser from configuration.properties
-        //String browserType = getBrowserType();
-
-        // use this if you read browser type as parameter (running mvn test -Dbrowser="chrome")
-        String browserType = System.getProperty("browser");
+        String browserType = getBrowserType();
 
         switch (browserType) {
             case "chrome" :
@@ -53,19 +49,28 @@ public class DriverFactory {
 
     private static String getBrowserType() {
         String browserType=null;
-        Properties properties = new Properties();
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(System.getProperty("user.dir")+"/src/main/java/properties/configuration.properties");
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
+        String browserTypeFromSystem = System.getProperty("browser");
+
+        // if there no System.getProperty("browser") we are going to take browser type from the configuration
+        // else we are going to use System.getProperty("browser")
+        // to run tests with given browser parameter
+        // mvn test  -Dbrowser="chrome"
+        if(browserTypeFromSystem == null || browserTypeFromSystem.isEmpty()) {
+            Properties properties = new Properties();
+            FileInputStream fis = null;
+            try {
+                fis = new FileInputStream(System.getProperty("user.dir") + "/src/main/java/properties/configuration.properties");
+            } catch (FileNotFoundException e) {
+                System.out.println(e);
+            }
+            try {
+                properties.load(fis);
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+            browserType = properties.getProperty("browser").toLowerCase().trim();
         }
-        try {
-            properties.load(fis);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-        browserType = properties.getProperty("browser").toLowerCase().trim();
+        else browserType = browserTypeFromSystem;
         return browserType;
     }
 
